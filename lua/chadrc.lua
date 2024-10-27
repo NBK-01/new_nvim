@@ -13,4 +13,14 @@ M.base46 = {
 	-- },
 }
 
+M.ui = {
+	cmp = {
+		lspkidn_text = true,
+		style = "default",
+		format_colors = {
+			tailwind = true,
+		},
+	},
+}
+
 return M

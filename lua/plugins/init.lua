@@ -34,6 +34,15 @@ return {
     end
   },
 
+ {
+ "github/copilot.vim",
+    lazy = false,
+    config = function() -- Mapping tab is already used in NvChad
+      vim.g.copilot_no_tab_map = true; -- Disable tab mapping
+      vim.g.copilot_assume_mapped = true; -- Assume that the mapping is already done
+    end
+},
+
   {
     'rust-lang/rust.vim',
     ft = "rust",
@@ -68,6 +77,14 @@ return {
 			require("dapui").setup()
 		end,
   },
+ {
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      user_default_options = {
+        tailwind = true,
+      },
+    },
+  },
 
   {
     'saecki/crates.nvim',
@@ -85,14 +102,27 @@ return {
       })
     end
   },
+{
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+    },
+    opts = function(_, opts)
+      -- original LazyVim kind icon formatter
+      local format_kinds = opts.formatting.format
+      opts.formatting.format = function(entry, item)
+        format_kinds(entry, item) -- add icons
+        return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+      end
+    end,
+  },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+  	"nvim-treesitter/nvim-treesitter",
+  	opts = {
+  		ensure_installed = {
+  			"vim", "lua", "vimdoc", "css", "tsx", "typescript", "javascript"
+  		},
+  	},
+  },
 }

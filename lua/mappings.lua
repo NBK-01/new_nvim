@@ -10,6 +10,10 @@ map("i", "jk", "<ESC>")
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Nvim DAP
+--
+map('i', '<Leader>cc', function ()
+  vim.fn.feedkeys(vim.fn['copilot#Accept'](), '')
+end, { desc = 'Copilot Accept', noremap = true, silent = true })
 map("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
 map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
 map("n", "<Leader>dk", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Debugger step out" })
